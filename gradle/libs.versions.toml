@@ -1,6 +1,7 @@
 [versions]
 agp = "8.2.2"
 kotlin = "1.9.22"
+navigation = "2.7.7"
 compose-compiler = "1.5.10"
 compose-bom = "2024.02.01"
 
@@ -10,11 +11,15 @@ androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version = "2.7.0" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version = "1.8.2" }
 
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 compose-ui = { module = "androidx.compose.ui:ui" }
 compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-material-icons = { module = "androidx.compose.material:material-icons-extended-android" }
 
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
@@ -37,11 +42,16 @@ androidx = [
     "androidx-lifecycle-runtime",
     "androidx-activity-compose",
 ]
+navigation = [
+    "navigation-fragment-ktx",
+    "navigation-ui-ktx",
+]
 compose = [
     "compose-ui",
     "compose-ui-graphics",
     "compose-ui-tooling-preview",
     "compose-material3",
+    "compose-material-icons"
 ]
 compose-debug = [
     "compose-ui-tooling",
