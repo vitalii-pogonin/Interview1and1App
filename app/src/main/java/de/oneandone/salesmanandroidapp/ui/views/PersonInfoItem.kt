@@ -1,4 +1,4 @@
-package de.oneandone.salesmanandroidapp.list.views
+package de.oneandone.salesmanandroidapp.ui.views
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
@@ -28,10 +28,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.oneandone.salesmanandroidapp.list.models.SalesmanItemData
 import de.oneandone.salesmanandroidapp.ui.theme.SalesmanTheme
-import de.oneandone.salesmanandroidapp.ui.views.Avatar
 
 @Composable
-fun SalesmanItem(
+fun PersonInfoItem(
     data: SalesmanItemData,
     modifier: Modifier = Modifier
 ) {
@@ -84,9 +83,9 @@ fun SalesmanItem(
 
 @Preview(showBackground = true)
 @Composable
-fun SalesmanItemPreview() {
+fun PersonInfoItemPreview() {
     SalesmanTheme {
-        SalesmanItem(
+        PersonInfoItem(
             data = SalesmanItemData(
                 initials = "A",
                 name = "Anna Müller",
