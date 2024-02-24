@@ -2,6 +2,7 @@
 agp = "8.2.2"
 kotlin = "1.9.22"
 hilt = "2.50"
+realm = "1.13.0"
 navigation = "2.7.7"
 compose-compiler = "1.5.10"
 compose-bom = "2024.02.01"
@@ -17,6 +18,9 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+
+realm = { module = "io.realm.kotlin:library-base", version.ref = "realm" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.7.1" }
 
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
@@ -44,6 +48,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+realm = { id = "io.realm.kotlin", version.ref = "realm" }
 
 [bundles]
 androidx = [
@@ -52,6 +57,10 @@ androidx = [
     "androidx-lifecycle-runtime",
     "androidx-lifecycle-runtime-compose",
     "androidx-activity-compose",
+]
+realm =[
+    "realm",
+    "coroutines"
 ]
 navigation = [
     "navigation-fragment-ktx",
