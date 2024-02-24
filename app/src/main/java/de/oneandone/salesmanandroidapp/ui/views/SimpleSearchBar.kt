@@ -15,11 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -35,9 +31,9 @@ import de.oneandone.salesmanandroidapp.ui.theme.SalesmanTheme
 @Composable
 fun SimpleSearchBar(
     query: String,
+    onQueryChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var input by rememberSaveable { mutableStateOf(query) }
     ElevatedCard(
         elevation = CardDefaults.elevatedCardElevation(8.dp),
         shape = RectangleShape,
@@ -45,12 +41,12 @@ fun SimpleSearchBar(
     ) {
         val interactionSource = remember { MutableInteractionSource() }
         BasicTextField(
-            value = input,
+            value = query,
             onValueChange = {
                 if (it.isEmpty() ||
                     (it.length <= SEARCH_INPUT_SIZE && it.matches(SEARCH_INPUT_REGEX))
                 ) {
-                    input = it
+                    onQueryChange(it)
                 }
             },
             maxLines = 1,
@@ -59,7 +55,7 @@ fun SimpleSearchBar(
             ),
             decorationBox = { innerTextField ->
                 TextFieldDefaults.DecorationBox(
-                    value = input,
+                    value = query,
                     innerTextField = innerTextField,
                     placeholder = {
                         Text(
@@ -112,6 +108,9 @@ private val SEARCH_INPUT_REGEX = Regex("[0-9]+")
 @Composable
 fun SimpleSearchBarPreview() {
     SalesmanTheme {
-        SimpleSearchBar("")
+        SimpleSearchBar(
+            query = "",
+            onQueryChange = {}
+        )
     }
 }

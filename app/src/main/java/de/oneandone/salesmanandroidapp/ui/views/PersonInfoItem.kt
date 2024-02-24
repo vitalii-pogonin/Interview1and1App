@@ -26,13 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import de.oneandone.salesmanandroidapp.list.models.SalesmanItemData
 import de.oneandone.salesmanandroidapp.ui.theme.SalesmanTheme
 
 @Composable
 fun PersonInfoItem(
-    data: SalesmanItemData,
-    modifier: Modifier = Modifier
+    initials: String, title: String, subtitle: String, modifier: Modifier = Modifier
 ) {
     var expanded by rememberSaveable { mutableStateOf(false) }
     val arrowAngle by remember(expanded) {
@@ -46,24 +44,26 @@ fun PersonInfoItem(
         verticalAlignment = Alignment.Top
     ) {
         Avatar(
-            initials = data.initials,
-            modifier.padding(vertical = 1.dp)
+            initials = initials,
+            modifier = modifier.padding(vertical = 1.dp)
         )
         Column(
             modifier = Modifier
                 .weight(1f)
                 .sizeIn(minHeight = 42.dp)
-                .wrapContentHeight(align = Alignment.CenterVertically),
+                .wrapContentHeight(
+                    align = Alignment.CenterVertically
+                ),
             verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {
             Text(
-                text = data.name,
+                text = title,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.secondary,
             )
             AnimatedVisibility(visible = expanded) {
                 Text(
-                    text = data.postCodeInfo,
+                    text = subtitle,
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.tertiary
                 )
@@ -86,11 +86,9 @@ fun PersonInfoItem(
 fun PersonInfoItemPreview() {
     SalesmanTheme {
         PersonInfoItem(
-            data = SalesmanItemData(
-                initials = "A",
-                name = "Anna Müller",
-                postCodeInfo = "73133, 76131\n73133, 76131\n73133, 76131"
-            )
+            initials = "A",
+            title = "Anna Müller",
+            subtitle = "73133, 76131\n73133, 76131\n73133, 76131"
         )
     }
 }

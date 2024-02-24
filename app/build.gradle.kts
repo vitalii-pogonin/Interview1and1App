@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin)
+    alias(libs.plugins.hilt)
+    kotlin("kapt")
 }
 
 android {
@@ -26,8 +28,16 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
     kotlin {
         jvmToolchain(17)
+    }
+    kapt {
+        correctErrorTypes = true
     }
     buildFeatures {
         compose = true
@@ -35,15 +45,12 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
     implementation(libs.bundles.androidx)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
     implementation(libs.bundles.navigation)
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)

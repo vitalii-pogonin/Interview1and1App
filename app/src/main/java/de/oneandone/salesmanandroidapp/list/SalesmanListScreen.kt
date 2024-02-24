@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -20,7 +21,11 @@ import de.oneandone.salesmanandroidapp.ui.views.SimpleSearchBar
 import de.oneandone.salesmanandroidapp.ui.views.SimpleTopAppBar
 
 @Composable
-fun SalesmanListScreen() {
+fun SalesmanListScreen(
+    searchQuery: String,
+    onQueryChange: (String) -> Unit,
+    salesmanList: List<SalesmanItemData>
+) {
     Scaffold(
         topBar = {
             SimpleTopAppBar(title = stringResource(id = R.string.salesman_list_title))
@@ -30,7 +35,8 @@ fun SalesmanListScreen() {
             modifier = Modifier.padding(it)
         ) {
             SimpleSearchBar(
-                query = "",
+                query = searchQuery,
+                onQueryChange = onQueryChange,
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 24.dp)
@@ -39,13 +45,11 @@ fun SalesmanListScreen() {
                 modifier = Modifier.weight(1f),
                 contentPadding = PaddingValues(top = 24.dp)
             ) {
-                items(20) {
+                items(salesmanList) { salesman ->
                     PersonInfoItem(
-                        data = SalesmanItemData(
-                            initials = "A",
-                            name = "Anna Müller",
-                            postCodeInfo = "73133, 76131"
-                        )
+                        initials = salesman.initials,
+                        title = salesman.name,
+                        subtitle = salesman.areas
                     )
                     HorizontalDivider(
                         color = MaterialTheme.colorScheme.onSurface,
@@ -62,6 +66,16 @@ fun SalesmanListScreen() {
 @Composable
 fun SalesmanListScreenPreview() {
     SalesmanTheme {
-        SalesmanListScreen()
+        SalesmanListScreen(
+            searchQuery = "",
+            onQueryChange = {},
+            salesmanList = listOf(
+                SalesmanItemData(
+                    initials = "A",
+                    name = "Anna Müller",
+                    areas = "73133, 76131"
+                )
+            )
+        )
     }
 }
